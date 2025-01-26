@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="file.css">
+    <style>
+        /* Updated CSS as mentioned above */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand-title">UPLOAD FILE</div>
+        <div class="inputs">
+            <label for="fileInput" class="choose-button">Choose</label>
+            <input type="file" id="fileInput" multiple accept=".pdf,.docx,.txt,.img,.png,.jpg,.jpeg" style="display:none;" />
+            <ul class="file-list" id="fileList"></ul>
+            <br><br>
+            <button type="submit">UPLOAD</button>
+        </div>
+        
+        <!-- Next button -->
+        <button class="next-button">Next</button>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const filesArray = []; // Array to keep track of selected files
+
+        fileInput.addEventListener('change', () => {
+            const newFiles = Array.from(fileInput.files); // Get selected files
+
+            // Add new files to the array, avoiding duplicates
+            newFiles.forEach(file => {
+                if (!filesArray.some(f => f.name === file.name)) {
+                    filesArray.push(file);
+                }
+            });
+
+            updateFileList(); // Update the displayed list
+            fileInput.value = ''; // Clear file input to allow re-adding files with the same name
+        });
+
+        function updateFileList() {
+            fileList.innerHTML = ''; // Clear the current list
+
+            filesArray.forEach((file, index) => {
+                const listItem = document.createElement('li');
+
+                // File name
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+
+                // Delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => {
+                    filesArray.splice(index, 1); // Remove file from the array
+                    updateFileList(); // Update the list
+                };
+
+                listItem.appendChild(fileName);
+                listItem.appendChild(deleteButton);
+                fileList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
