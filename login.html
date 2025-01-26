@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="loginstyle.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="brand-title">GeeseClaims</div>
+            <div class="inputs">
+              <label>EMAIL</label>
+              <input type="email" id="loginEmail" placeholder="example@email.com" />
+              <label>PASSWORD</label>
+              <input type="password" id="loginPassword" placeholder="password123"/>
+              <button onclick="login()" type="submit">LOGIN</button>
+              <p> Don't have an account?
+                <a href="signup.html">Sign up</a>
+              </p>
+
+              <!--
+              <button id="clearStorage">Clear All Data</button>
+                <script>
+                    document.getElementById("clearStorage").addEventListener("click", () => {
+                        localStorage.clear(); // Clear all data from localStorage
+                        alert("Local storage has been cleared!");
+                    });
+                </script>
+                //-->
+
+            </div>
+          </div>
+
+          <script src="script.js"></script>
+    </body>
+</html>
