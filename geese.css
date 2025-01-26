@@ -4,15 +4,15 @@ body {
     height: 100vh;
     background: #ecf0f3;
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: center; /* Center horizontally */
     text-align: center;
     place-items: center;
     overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .container {
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
     position: relative;
     width: 350px;
     min-height: 500px; /* Changed to min-height to ensure enough space */
@@ -20,41 +20,45 @@ body {
     padding: 20px;
     box-sizing: border-box;
     background: #ecf0f3;
-    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    box-shadow:
+        14px 14px 20px #cbced1,
+        -14px -14px 20px white;
     display: flex;
     flex-direction: column; /* Stack elements vertically */
     overflow-y: auto; /* Allow scrolling if content overflows */
     justify-content: space-between; /* Ensure space is distributed and "Next" button is at the bottom */
 }
-  
-  .brand-title {
+
+.brand-title {
     margin-top: 10px;
     font-weight: 900;
     font-size: 1.8rem;
     color: #c18437;
     letter-spacing: 1px;
-  }
-  
-  .inputs {
+}
+
+.inputs {
     text-align: left;
     margin-top: 20px;
     flex-grow: 1; /* Allow inputs section to grow and take available space */
-  }
-  
-  label, input, button {
+}
+
+label,
+input,
+button {
     display: block;
     width: 100%;
     padding: 0;
     border: none;
     outline: none;
     box-sizing: border-box;
-  }
-  
-  input::placeholder {
+}
+
+input::placeholder {
     color: gray;
-  }
-  
-  .choose-button {
+}
+
+.choose-button {
     position: relative;
     top: 2px;
     left: 70px;
@@ -62,7 +66,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: white;
-    color: #1DA1F2;
+    color: #1da1f2;
     width: 120px;
     height: 40px;
     font-weight: 900;
@@ -70,32 +74,34 @@ body {
     text-align: center;
     border-radius: 20px;
     cursor: pointer;
-    border: 2px solid #1DA1F2;
+    border: 2px solid #1da1f2;
     margin-top: 10px;
     transition: 0.3s ease;
-  }
-  
-  input[type="file"] {
+}
+
+input[type="file"] {
     display: none;
-  }
-  
-  .choose-button:hover {
-    background-color: #1DA1F2;
+}
+
+.choose-button:hover {
+    background-color: #1da1f2;
     color: white;
     border-color: white;
-  }
-  
-  input {
+}
+
+input {
     background: #ecf0f3;
     padding: 10px;
     padding-left: 20px;
     height: 50px;
     font-size: 14px;
     border-radius: 50px;
-    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
-  }
-  
-  button {
+    box-shadow:
+        inset 6px 6px 6px #cbced1,
+        inset -6px -6px 6px white;
+}
+
+button {
     color: white;
     margin-top: 10px;
     background: #c18437;
@@ -103,25 +109,27 @@ body {
     border-radius: 20px;
     cursor: pointer;
     font-weight: 900;
-    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    box-shadow:
+        6px 6px 6px #cbced1,
+        -6px -6px 6px white;
     transition: 0.5s;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     box-shadow: none;
-  }
-  
-  .file-list {
+}
+
+.file-list {
     margin-top: 10px;
     list-style: none;
     padding: 0;
-    max-height: 150px;  /* Adjust to control the visible file list area */
+    max-height: 150px; /* Adjust to control the visible file list area */
     overflow-y: scroll; /* Allow scrolling when content overflows */
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  
-  .file-list li {
+}
+
+.file-list li {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -129,43 +137,45 @@ body {
     font-size: 12px;
     line-height: 1.2;
     overflow: hidden;
-  }
-  
-  .file-list button {
-    background-color: #ff4d4d; 
-    color: white; 
-    border: none; 
+}
+
+.file-list button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
     border-radius: 20px;
     padding: 3px 3px;
-    width: 50px; 
-    height: 20px; 
+    width: 50px;
+    height: 20px;
     cursor: pointer;
-    font-size: 10px; 
+    font-size: 10px;
     transition: background-color 0.3s ease;
     float: right;
-  }
-  
-  .file-list button:hover {
-    background-color: #cc0000; 
-  }
-  
-  .choose-button {
-    font-size: 16px; 
-    padding: 10px 20px; 
-    background-color: #1DA1F2; 
-    align: center; 
+}
+
+.file-list button:hover {
+    background-color: #cc0000;
+}
+
+.choose-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #1da1f2;
+    align: center;
     left: 95px;
-    color: white;  
-    border-radius: 20px;  
-    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    color: white;
+    border-radius: 20px;
+    box-shadow:
+        6px 6px 6px #cbced1,
+        -6px -6px 6px white;
     cursor: pointer;
-  }
-  
-  .choose-button:hover {
-    background-color: #1DA1F2;
-  }
-  
-  button[type="submit"] {
+}
+
+.choose-button:hover {
+    background-color: #1da1f2;
+}
+
+button[type="submit"] {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -174,15 +184,15 @@ body {
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    width: 100%; 
+    width: 100%;
     text-align: center;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #1DA1F2;
-  }
-  
-  .next-button {
+}
+
+button[type="submit"]:hover {
+    background-color: #1da1f2;
+}
+
+.next-button {
     margin-top: 20px;
     padding: 5px 20px;
     font-size: 16px;
@@ -196,7 +206,10 @@ body {
     text-align: center;
     box-sizing: border-box; /* Ensure proper width handling */
 }
-  
+
 .next-button:hover {
     background-color: #0a89cc;
+}
+a {
+    color: white;
 }

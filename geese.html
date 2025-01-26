@@ -1,71 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload File</title>
-    <link rel="stylesheet" href="file.css">
-    <style>
-        /* Updated CSS as mentioned above */
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="brand-title">UPLOAD FILE</div>
-        <div class="inputs">
-            <label for="fileInput" class="choose-button">Choose</label>
-            <input type="file" id="fileInput" multiple accept=".pdf,.docx,.txt,.img,.png,.jpg,.jpeg" style="display:none;" />
-            <ul class="file-list" id="fileList"></ul>
-            <br><br>
-            <button type="submit">UPLOAD</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Upload File</title>
+        <link rel="stylesheet" href="geese.css" />
+        <style>
+            /* Updated CSS as mentioned above */
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="brand-title">UPLOAD FILE</div>
+            <div class="inputs">
+                <label for="fileInput" class="choose-button">Choose</label>
+                <input
+                    type="file"
+                    id="fileInput"
+                    multiple
+                    accept=".pdf,.docx,.txt,.img,.png,.jpg,.jpeg"
+                    style="display: none"
+                />
+                <ul class="file-list" id="fileList"></ul>
+                <br /><br />
+                <button type="submit">UPLOAD</button>
+                <script>
+                    // Firebase configuration
+                    const firebaseConfig = {
+                        apiKey: "YOUR_API_KEY",
+                        authDomain: "YOUR_AUTH_DOMAIN",
+                        projectId: "YOUR_PROJECT_ID",
+                        storageBucket: "YOUR_STORAGE_BUCKET",
+                        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+                        appId: "YOUR_APP_ID",
+                    };
+
+                    // Initialize Firebase
+                    const app = firebase.initializeApp(firebaseConfig);
+                    const storage = firebase.storage();
+                    const db = firebase.firestore();
+
+                    // Function to upload PDF and save the URL in Firestore
+                    function uploadPdf() {
+                        const pdfFile =
+                            document.getElementById("pdfInput").files[0];
+                        if (!pdfFile) {
+                            alert("Please select a PDF file to upload.");
+                            return;
+                        }
+
+                        // Create a storage reference
+                        const storageRef = storage.ref("pdfs/" + pdfFile.name);
+
+                        // Upload the PDF to Firebase Storage
+                        const uploadTask = storageRef.put(pdfFile);
+
+                        uploadTask.on(
+                            "state_changed",
+                            function (snapshot) {
+                                // Optional: Track upload progress
+                                const progress =
+                                    (snapshot.bytesTransferred /
+                                        snapshot.totalBytes) *
+                                    100;
+                                console.log("Upload is " + progress + "% done");
+                            },
+                            function (error) {
+                                // Handle errors
+                                console.error("Upload failed:", error);
+                            },
+                            function () {
+                                // When upload is complete
+                                uploadTask.snapshot.ref
+                                    .getDownloadURL()
+                                    .then(function (downloadURL) {
+                                        console.log(
+                                            "File available at",
+                                            downloadURL,
+                                        );
+
+                                        // Save the URL to Firestore
+                                        db.collection("pdfs")
+                                            .add({
+                                                name: pdfFile.name,
+                                                url: downloadURL,
+                                                uploadedAt:
+                                                    firebase.firestore.FieldValue.serverTimestamp(),
+                                            })
+                                            .then(() => {
+                                                alert(
+                                                    "PDF uploaded successfully!",
+                                                );
+                                            })
+                                            .catch((error) => {
+                                                console.error(
+                                                    "Error adding document: ",
+                                                    error,
+                                                );
+                                            });
+                                    });
+                            },
+                        );
+                    }
+                </script>
+            </div>
+
+            <!-- Next button -->
+            <button class="next-button"><a href="submission.html">Next</button>
         </div>
-        
-        <!-- Next button -->
-        <button class="next-button">Next</button>
-    </div>
 
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const fileList = document.getElementById('fileList');
-        const filesArray = []; // Array to keep track of selected files
+        <script>
+            const fileInput = document.getElementById("fileInput");
+            const fileList = document.getElementById("fileList");
+            const filesArray = []; // Array to keep track of selected files
 
-        fileInput.addEventListener('change', () => {
-            const newFiles = Array.from(fileInput.files); // Get selected files
+            fileInput.addEventListener("change", () => {
+                const newFiles = Array.from(fileInput.files); // Get selected files
 
-            // Add new files to the array, avoiding duplicates
-            newFiles.forEach(file => {
-                if (!filesArray.some(f => f.name === file.name)) {
-                    filesArray.push(file);
-                }
+                // Add new files to the array, avoiding duplicates
+                newFiles.forEach((file) => {
+                    if (!filesArray.some((f) => f.name === file.name)) {
+                        filesArray.push(file);
+                    }
+                });
+
+                updateFileList(); // Update the displayed list
+                fileInput.value = ""; // Clear file input to allow re-adding files with the same name
             });
 
-            updateFileList(); // Update the displayed list
-            fileInput.value = ''; // Clear file input to allow re-adding files with the same name
-        });
+            function updateFileList() {
+                fileList.innerHTML = ""; // Clear the current list
 
-        function updateFileList() {
-            fileList.innerHTML = ''; // Clear the current list
+                filesArray.forEach((file, index) => {
+                    const listItem = document.createElement("li");
 
-            filesArray.forEach((file, index) => {
-                const listItem = document.createElement('li');
+                    // File name
+                    const fileName = document.createElement("span");
+                    fileName.textContent = file.name;
 
-                // File name
-                const fileName = document.createElement('span');
-                fileName.textContent = file.name;
+                    // Delete button
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.onclick = () => {
+                        filesArray.splice(index, 1); // Remove file from the array
+                        updateFileList(); // Update the list
+                    };
 
-                // Delete button
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.onclick = () => {
-                    filesArray.splice(index, 1); // Remove file from the array
-                    updateFileList(); // Update the list
-                };
-
-                listItem.appendChild(fileName);
-                listItem.appendChild(deleteButton);
-                fileList.appendChild(listItem);
-            });
-        }
-    </script>
-</body>
+                    listItem.appendChild(fileName);
+                    listItem.appendChild(deleteButton);
+                    fileList.appendChild(listItem);
+                });
+            }
+        </script>
+    </body>
 </html>
