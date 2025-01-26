@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
 body {
     margin: 0;
     width: 100vw;
@@ -15,7 +17,7 @@ body {
 .container {
     position: relative;
     width: 350px;
-    min-height: 500px; /* Changed to min-height to ensure enough space */
+    min-height: 320px; /* Changed to min-height to ensure enough space */
     border-radius: 20px;
     padding: 20px;
     box-sizing: border-box;
@@ -39,7 +41,6 @@ body {
 
 .inputs {
     text-align: left;
-    margin-top: 20px;
     flex-grow: 1; /* Allow inputs section to grow and take available space */
 }
 
@@ -70,7 +71,7 @@ input::placeholder {
     width: 120px;
     height: 40px;
     font-weight: 900;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     border-radius: 20px;
     cursor: pointer;
@@ -158,12 +159,12 @@ button:hover {
 }
 
 .choose-button {
-    font-size: 16px;
+    font-size: 13px;
     padding: 10px 20px;
-    background-color: #1da1f2;
+    background-color: white;
     align: center;
     left: 95px;
-    color: white;
+    color: #0a89cc;
     border-radius: 20px;
     box-shadow:
         6px 6px 6px #cbced1,
@@ -172,13 +173,13 @@ button:hover {
 }
 
 .choose-button:hover {
-    background-color: #1da1f2;
+    background-color: #0a89cc;
 }
 
 button[type="submit"] {
     margin-top: 20px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 15px;
     background-color: #c18437;
     color: white;
     border: none;
@@ -189,7 +190,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #1da1f2;
+    background-color: #0a89cc;
 }
 
 .next-button {
@@ -213,3 +214,22 @@ button[type="submit"]:hover {
 a {
     color: white;
 }
+
+a:link { 
+    text-decoration: none; 
+    color:#37a1b0;
+  } 
+  a:visited { 
+    text-decoration: none; 
+  } 
+  a:hover { 
+    text-decoration: underline; 
+  } 
+  a:active { 
+    text-decoration: none; 
+  }
+
+  p {
+    text-align: center;
+  }
+

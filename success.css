@@ -20,8 +20,8 @@ body {
 
 .container {
   position: relative;
-  width: 350px;
-  height: 460px;
+  width: 400px;
+  height: 200px;
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
@@ -91,7 +91,7 @@ button:hover {
 
 a:link { 
     text-decoration: none; 
-    color:#37a1b0;
+    color:white;
   } 
   a:visited { 
     text-decoration: none; 

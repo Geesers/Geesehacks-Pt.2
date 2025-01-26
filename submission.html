@@ -1,14 +1,22 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
     <head>
-        <link rel="stylesheet" href="submissions.css" />
-        <meta charset="UTF-8" />
-        <title>Submissions</title>
+        <title>GeeseClaims</title>
+        <link rel="stylesheet" href="submission.css">
     </head>
-        <h1>Submissions</h1>
-        <h2>Items to submit</h2>
+    <body>
+        <div class="container">
+            <div class="brand-title">Submissions</div>
+            <div class="inputs">
+                <P>Entered all your information? Click below to submit.</P>
+                <button onclick="submit()" type="submit">SUBMIT TO INSURANCE</button>
+                <script>
+                    function submit(){
+                        window.location.href = "success.html";
+                    }
+                </script>
+            </div>
+          </div>
 
-        <!-- Needs to obtain data from api -->
-        <button><a href="success.html">Submit to Insurance</button>
     </body>
 </html>
