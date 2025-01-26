@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Checklist</title>
+
+    <!-- Inline Styles -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ecf0f3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .container {
+        position: relative;
+        width: 400px;
+        height: 600px;
+        border-radius: 20px;
+        background: #ecf0f3;
+        box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: #c18437;
+        margin-bottom: 20px;
+      }
+
+      .inputs {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      input {
+        flex: 1;
+        background: #ecf0f3;
+        padding: 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        outline: none;
+      }
+
+      button {
+        background: #c18437;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        box-shadow: none;
+      }
+
+      .item-list {
+        flex: 1;
+        width: 100%;
+        background: #ecf0f3;
+        border-radius: 10px;
+        box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        overflow-y: auto;
+        padding: 10px;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        background: #f7f9fc;
+        border-radius: 8px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .item span {
+        font-weight: bold;
+      }
+
+      .item input {
+        width: 60px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .memory-aid {
+        margin-top: 20px;
+        width: 100%;
+        background: #c18437;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+        transition: all 0.3s ease;
+      }
+
+      .memory-aid:hover {
+        box-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Inventory Checklist</div>
+
+      <div class="inputs">
+        <input type="text" id="custom-item" placeholder="Add custom item" />
+        <button id="add-item">Add</button>
+      </div>
+
+      <div class="item-list" id="item-list"></div>
+
+      <button class="memory-aid" id="memory-aid">Show Memory Aid</button>
+    </div>
+
+    <script>
+      const addItemButton = document.querySelector('#add-item');
+      const customItemInput = document.querySelector('#custom-item');
+      const itemList = document.querySelector('#item-list');
+      const memoryAidButton = document.querySelector('#memory-aid');
+
+      const predefinedItems = [
+        { name: 'Furniture', quantity: 0 },
+        { name: 'Electronics', quantity: 0 },
+        { name: 'Clothing', quantity: 0 },
+        { name: 'Kitchenware', quantity: 0 },
+        { name: 'Important Documents', quantity: 0 },
+        { name: 'Jewelry', quantity: 0 },
+        { name: 'Personal Items', quantity: 0 },
+      ];
+
+      const memoryAids = [
+        "Do you remember your bedroom furniture setup?",
+        "What was in your garage or storage area?",
+        "Think about items in your living room.",
+        "Did you have any outdoor furniture or tools?",
+      ];
+
+      function renderItems(items) {
+        itemList.innerHTML = '';
+        items.forEach((item, index) => {
+          const listItem = document.createElement('div');
+          listItem.classList.add('item');
+          listItem.innerHTML = `
+            <span>${item.name}</span>
+            <input type="number" min="0" value="${item.quantity}" data-index="${index}" />
+          `;
+          itemList.appendChild(listItem);
+        });
+      }
+
+      addItemButton.addEventListener('click', () => {
+        const customItemName = customItemInput.value.trim();
+        if (customItemName) {
+          predefinedItems.push({ name: customItemName, quantity: 0 });
+          customItemInput.value = '';
+          renderItems(predefinedItems);
+        }
+      });
+
+      memoryAidButton.addEventListener('click', () => {
+        const randomAid = memoryAids[Math.floor(Math.random() * memoryAids.length)];
+        alert(randomAid);
+      });
+
+      // Initialize the item list
+      renderItems(predefinedItems);
+    </script>
+  </body>
+</html>
+
+
