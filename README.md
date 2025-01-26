@@ -1,4 +1,4 @@
-GeeseHacks 2025 Project
+GeeseHacks 2025 Project: https://geese-claims.web.app/
 
 ## Inspiration 
 GeeseClaims was inspired by the recent LA wildfires and the struggles experienced by younger affected individuals who were making their first insurance claim. The goal of GeeseClaims is to take away the stress of making an insurance claim by guiding the user through the entire process from start to finish.
